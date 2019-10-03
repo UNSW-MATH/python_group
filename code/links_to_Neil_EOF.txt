@@ -1,0 +1,6 @@
+If you want to be able to play around with the package during the meeting, you can install it using conda or pip - instructions are here:https://ajdawson.github.io/eofs/latest/
+
+There is also a journal of open research software article on the package: https://openresearchsoftware.metajnl.com/articles/10.5334/jors.122/
+
+I’ll show a basic example of calculating EOF’s from altimetry and then plotting them and their PC’s. I’d then be keen to have some discussion around implementing more advanced methods (complex and rotated EOFs), as these have not yet been developed for the package.
+

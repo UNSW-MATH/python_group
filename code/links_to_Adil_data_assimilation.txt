@@ -1,0 +1,2 @@
+I would suggest us to download a python notebook from https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python.
+We will then run this notebook using Jupiter. It covers the whole basic to perform all sorts of Bayesian filtering, and we will be focusing on Linear and Nonlinear version of Kalman Filter for the session.
