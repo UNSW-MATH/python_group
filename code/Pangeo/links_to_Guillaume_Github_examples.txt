@@ -1,0 +1,5 @@
+Pangeo examples: https://github.com/serazing/now-postprocess/blob/master/examples/Present_vs_Future.ipynb
+
+Ocean xarray/dask examples:
+https://github.com/serazing/seaobs/tree/master/seaobs
+https://github.com/serazing/sitt/blob/master/sitt/glider.py

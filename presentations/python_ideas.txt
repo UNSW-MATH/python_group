@@ -1,0 +1,23 @@
+Ideas for future Python meetings:
+
+1    How to install Python? What are the different ways of doing so?
+2   Intro to Python
+3    Discuss some of the basics of Python
+4    MatLab to Python: ways to transition
+5    Share a solution to a problem in own work
+6    Walk through problems in a script together
+7    Sharing Python insights
+8    Use mailing list to help each other with problems
+9    De-bug code
+10    GUI in Python?
+11   Data logging over serial coms
+12    How to use Iris/CF
+13   Changing data formats using Python
+14    Plotting (e.g. MatPlotLib, Cartopy)
+15    Working with NetCDF data formats
+16    Using MatPlotLib for plotting
+17    Working through simple tasks (e.g. plotting a graph) together and comparing different ways of performing that task
+18   How to make scripts more efficient
+19    Various ways to plot 3D graphics
+
+The idea is that we discuss topics/features and share knowledge etc. with each other in an informal and interactive manner. These Python sessions rely on your input and participation. They are an opportunity for you to expand your Python skills!
