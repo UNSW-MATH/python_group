@@ -1,0 +1,3 @@
+Lachlan Phillips gave a presentation of his code used to identify the EAC using machine learning.
+
+link to download: https://www.dropbox.com/s/89v1fsly42zrkrh/oceancc-jupyter.zip?dl=0
