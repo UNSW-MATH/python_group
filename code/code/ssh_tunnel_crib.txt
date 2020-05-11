@@ -1,9 +1,0 @@
-ssh -Y z3526974@matht299.maths.unsw.edu.au
-remote$ jupyter notebook --no-browser --port=8889
-
-new terminal tab:
-ssh -N -L localhost:8888:localhost:8889 z3526974@matht299.maths.unsw.edu.au
-
-in browser: localhost:8888
-
-Link to explanation: https://coderwall.com/p/ohk6cg/remote-access-to-ipython-notebooks-via-ssh 

@@ -1,3 +1,0 @@
-website:http://pangeo.io/
-cloud data: http://pangeo.io/catalog.html
-different deployments: http://pangeo.io/deployments.html

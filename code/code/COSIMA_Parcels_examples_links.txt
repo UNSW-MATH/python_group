@@ -1,5 +1,0 @@
-From today's talk:
-
-https://cosima-cookbook.readthedocs.io/en/latest/getting_started.html - Cosima Cookbook getting started link (lots of examples + resources)
-
-http://oceanparcels.org/ - Parcels python package website, tutorials are here: http://oceanparcels.org/#tutorials
