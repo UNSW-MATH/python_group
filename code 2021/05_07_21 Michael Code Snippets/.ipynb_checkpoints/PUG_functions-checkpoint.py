@@ -7,6 +7,7 @@ Some functions presented during PUG on 05/07/2021
 
 """
 
+
 # %% ----------------------------------------------------------
 # Import packages
 
@@ -18,19 +19,14 @@ import pandas as pd
 import seaborn as sb
 import h5py 
 from scipy.io import loadmat
-from scipy import stats
-from scipy.io import savemat
 
 # %% ----------------------------------------------------------
 # Time functions
 
 # Converting from datetime to Numpy datetime64
 def to_date64(TIME):
-    
-    # convert to numpy
     if 'xarray' in str(type(TIME)):
         TIME = np.array(TIME)
-    # if only one time, easier to convert using numpy
     if np.size(TIME) == 1: 
         TIME = np.datetime64(TIME)
     else:
@@ -38,9 +34,7 @@ def to_date64(TIME):
         for nt in range(len(TIME)):
             o = TIME[nt]
             if '64' not in str(type(o)):
-                # both lines work
                 t.append(np.datetime64(o.strftime("%Y-%m-%dT%H:%M:%S")))
-                # t.append(np.datetime64(o))
             else:
                 t.append(o)
         TIME = np.array(t)
@@ -48,19 +42,40 @@ def to_date64(TIME):
     return TIME
     
 def to_datetime(TIME):
-    # convert to numpy
     if 'xarray' in str(type(TIME)):
-        TIME = np.array(TIME)   
-    # if only one time, easier to convert this way
+        TIME = np.array(TIME)    
     if np.size(TIME) == 1:
         TIME = TIME.tolist()
     else: 
         t = []
+        # Check that input is xarray data array
+        # if 'xarray' not in str(type(TIME)):
+        #     TIME = xr.DataArray(TIME)
         for nt in range(len(TIME)):
             o = TIME[nt]
-            t.append(o.tolist())
+            if '64' in str(type(o)):
+                t_str = str(np.array(o))
+                if len(t_str) > 10:
+                    yr = int(t_str[0:4])
+                    mn = int(t_str[5:7])
+                    dy = int(t_str[8:10])
+                    hr = int(t_str[11:13])
+                    mins = int(t_str[14:16])
+                    secs = int(t_str[17:19])
+                    t.append(dt.datetime(yr,mn,dy,hr,mins,secs))
+                if len(t_str) == 10:
+                    yr = int(t_str[0:4])
+                    mn = int(t_str[5:7])
+                    dy = int(t_str[8:10])                
+                    t.append(dt.datetime(yr,mn,dy))
+                if len(t_str) == 7:
+                    yr = int(t_str[0:4])
+                    mn = int(t_str[5:7])                
+                    t.append(dt.datetime(yr,mn,1))
+                if len(t_str) == 4:
+                    t.append(dt.datetime(yr,1,1))
         TIME = np.array(t) 
-                                  
+                                       
     return TIME
 
 # %% ---------------------------------------------------------
@@ -304,31 +319,9 @@ def datetime2matlabdn(python_datetime):
    frac_microseconds = python_datetime.microsecond / (24.0 * 60.0 * 60.0 * 1000000.0)
    return mdn.toordinal() + frac_seconds + frac_microseconds   
     
-# def matlabdn2datetime(matlab_datenum):
-#     time = []
-#     for n in range(len(matlab_datenum)):
-#         md = np.float(matlab_datenum[n])
-#         time.append(dt.datetime.fromordinal(int(md)) + dt.timedelta(days=md%1) - dt.timedelta(days = 366))
-        
-#     return time
+def matlabdn2datetime(matlab_datenum):
+    return dt.datetime.fromordinal(int(matlab_datenum)) + dt.timedelta(days=matlab_datenum%1) - dt.timedelta(days = 366)
 
-def matlabdn2datetime(datenum):
-    """
-    Convert Matlab datenum into Python datetime.
-    :param datenum: Date in datenum format
-    :return:        Datetime object corresponding to datenum.
-    """
-    time = []
-    for n in range(len(datenum)):
-        dn = np.float(datenum[n])
-        days = dn % 1
-        d = dt.datetime.fromordinal(int(dn)) \
-           + dt.timedelta(days=days) \
-           - dt.timedelta(days=366)
-        time.append(d)
-        
-    return time
-          
 # %% ------------------------------------------------------------
 # loading in MATLAB data
 
