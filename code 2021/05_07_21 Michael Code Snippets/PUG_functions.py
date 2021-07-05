@@ -156,7 +156,14 @@ def datevec(TIME):
 
 # %% ---------------------------------------------------------
 def bin_over_time(start_yr,end_yr,TIME,VARIABLE,res):
-
+    """
+    start / end = integer year
+    TIME = Time array 
+    VARIABLE = Variable array
+    res = 'monthly','daily','yearly'
+    
+    """
+    
     # convert TIME and VARIABLE to numpy array
     TIME = np.array(TIME)
     VARIABLE = np.array(VARIABLE)    
@@ -303,14 +310,6 @@ def datetime2matlabdn(python_datetime):
        python_datetime.day,0,0,0)).seconds / (24.0 * 60.0 * 60.0)
    frac_microseconds = python_datetime.microsecond / (24.0 * 60.0 * 60.0 * 1000000.0)
    return mdn.toordinal() + frac_seconds + frac_microseconds   
-    
-# def matlabdn2datetime(matlab_datenum):
-#     time = []
-#     for n in range(len(matlab_datenum)):
-#         md = np.float(matlab_datenum[n])
-#         time.append(dt.datetime.fromordinal(int(md)) + dt.timedelta(days=md%1) - dt.timedelta(days = 366))
-        
-#     return time
 
 def matlabdn2datetime(datenum):
     """
