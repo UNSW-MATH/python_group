@@ -48,19 +48,40 @@ def to_date64(TIME):
     return TIME
     
 def to_datetime(TIME):
-    # convert to numpy
     if 'xarray' in str(type(TIME)):
-        TIME = np.array(TIME)   
-    # if only one time, easier to convert this way
+        TIME = np.array(TIME)    
     if np.size(TIME) == 1:
         TIME = TIME.tolist()
     else: 
         t = []
+        # Check that input is xarray data array
+        # if 'xarray' not in str(type(TIME)):
+        #     TIME = xr.DataArray(TIME)
         for nt in range(len(TIME)):
             o = TIME[nt]
-            t.append(o.tolist())
+            if '64' in str(type(o)):
+                t_str = str(np.array(o))
+                if len(t_str) > 10:
+                    yr = int(t_str[0:4])
+                    mn = int(t_str[5:7])
+                    dy = int(t_str[8:10])
+                    hr = int(t_str[11:13])
+                    mins = int(t_str[14:16])
+                    secs = int(t_str[17:19])
+                    t.append(dt.datetime(yr,mn,dy,hr,mins,secs))
+                if len(t_str) == 10:
+                    yr = int(t_str[0:4])
+                    mn = int(t_str[5:7])
+                    dy = int(t_str[8:10])                
+                    t.append(dt.datetime(yr,mn,dy))
+                if len(t_str) == 7:
+                    yr = int(t_str[0:4])
+                    mn = int(t_str[5:7])                
+                    t.append(dt.datetime(yr,mn,1))
+                if len(t_str) == 4:
+                    t.append(dt.datetime(yr,1,1))
         TIME = np.array(t) 
-                                  
+
     return TIME
 
 # %% ---------------------------------------------------------
@@ -246,7 +267,7 @@ def bin_profile(VARIABLE,DEPTH,TIME,BINS,BIN_M,METHOD):
     if 'get' in BINS:
         H, edges = np.histogramdd(DEPTH,int(np.round(np.nanmax(DEPTH))/2))
         H = (H - np.nanmin(H)) / (np.nanmax(H)-np.nanmin(H))
-        # get weighted temporary bin sums in vertical depth
+        # get normalised temporary bin sums in vertical depth
         edges = np.squeeze(edges); edges = edges[0:-1]
         BINS = edges[H > 0.4]
         last_BIN = BINS[-1]
